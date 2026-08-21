@@ -3,153 +3,68 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>OSINT Tool Pro</title>
-    <!-- Leaflet для карты -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <!-- QRCode -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <!-- jsPDF для PDF -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <!-- html2canvas для скриншотов -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <title>OSINT Tool</title>
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-    <!-- ===== АНИМИРОВАННЫЙ ФОН ===== -->
     <canvas id="bgCanvas"></canvas>
 
-    <!-- ===== ГЛАВНЫЙ КОНТЕЙНЕР ===== -->
-    <div class="container" id="app">
+    <div class="container">
 
-        <!-- ХЕДЕР -->
         <header>
             <div class="logo">
                 <span class="logo-icon">🛡️</span>
                 <span class="logo-text">OSINT<span>Pro</span></span>
             </div>
-            <div class="header-controls">
-                <button id="themeToggle" class="btn-small">🌙</button>
-                <button id="langToggle" class="btn-small">RU</button>
-                <span class="version">v4.0</span>
-            </div>
+            <span class="version">v3.0</span>
         </header>
 
-        <!-- ВКЛАДКИ (ОСНОВНЫЕ) -->
-        <nav class="tabs" id="mainTabs">
-            <button class="tab active" data-tab="ip">🌐 IP</button>
-            <button class="tab" data-tab="phone">📞 Phone</button>
-            <button class="tab" data-tab="email">📧 Email</button>
-            <button class="tab" data-tab="social">🔍 Соц</button>
-            <button class="tab" data-tab="domain">🌍 Домен</button>
-            <button class="tab" data-tab="logger">🎯 Логгер</button>
-            <button class="tab" data-tab="image">🖼️ Фото</button>
-            <button class="tab" data-tab="history">📜 История</button>
-            <button class="tab" data-tab="settings">⚙️</button>
+        <nav class="tabs">
+            <button class="tab active" data-tab="ip">🌐 IP-локатор</button>
+            <button class="tab" data-tab="phone">📞 Phone-инфо</button>
+            <button class="tab" data-tab="social">🔍 Соц-чекер</button>
+            <button class="tab" data-tab="logger">🎯 IP-логгер</button>
         </nav>
 
-        <!-- ===== ВКЛАДКА 1: IP ===== -->
         <section id="ip" class="tab-content active">
             <h2>🌐 Геолокация по IP</h2>
             <div class="input-group">
-                <input type="text" id="ipInput" placeholder="Введите IP (например, 8.8.8.8)" list="historyList" />
-                <datalist id="historyList"></datalist>
+                <input type="text" id="ipInput" placeholder="Введите IP" />
                 <button class="btn" id="ipBtn">🔍 Найти</button>
                 <button class="btn-small" onclick="copyResult('ipResult')">📋</button>
-                <button class="btn-small" onclick="exportResult('ipResult', 'txt')">💾</button>
             </div>
             <div id="ipResult" class="result-card"></div>
-            <div id="ipMap" style="height: 250px; display: none; margin-top: 12px;"></div>
         </section>
 
-        <!-- ===== ВКЛАДКА 2: PHONE ===== -->
         <section id="phone" class="tab-content">
             <h2>📞 Информация по номеру</h2>
             <div class="input-group">
                 <input type="text" id="phoneInput" placeholder="+79261234567" />
                 <button class="btn" id="phoneBtn">🔍 Найти</button>
                 <button class="btn-small" onclick="copyResult('phoneResult')">📋</button>
-                <button class="btn-small" onclick="exportResult('phoneResult', 'txt')">💾</button>
             </div>
             <div id="phoneResult" class="result-card"></div>
-            <div id="phoneQR" style="margin-top: 10px;"></div>
         </section>
 
-        <!-- ===== ВКЛАДКА 3: EMAIL ===== -->
-        <section id="email" class="tab-content">
-            <h2>📧 Email-инфо</h2>
-            <div class="input-group">
-                <input type="email" id="emailInput" placeholder="example@mail.com" />
-                <button class="btn" id="emailBtn">🔍 Проверить</button>
-            </div>
-            <div id="emailResult" class="result-card"></div>
-        </section>
-
-        <!-- ===== ВКЛАДКА 4: SOCIAL ===== -->
         <section id="social" class="tab-content">
             <h2>🔍 Проверка в соцсетях</h2>
             <div class="input-group">
                 <input type="text" id="socialInput" placeholder="Юзернейм или номер" />
                 <button class="btn" id="socialBtn">🔍 Проверить</button>
+                <button class="btn-small" onclick="copyResult('socialResult')">📋</button>
             </div>
             <div id="socialResult" class="result-card"></div>
         </section>
 
-        <!-- ===== ВКЛАДКА 5: DOMAIN ===== -->
-        <section id="domain" class="tab-content">
-            <h2>🌍 WHOIS / DNS по домену</h2>
-            <div class="input-group">
-                <input type="text" id="domainInput" placeholder="example.com" />
-                <button class="btn" id="domainBtn">🔍 Найти</button>
-            </div>
-            <div id="domainResult" class="result-card"></div>
-        </section>
-
-        <!-- ===== ВКЛАДКА 6: LOGGER ===== -->
         <section id="logger" class="tab-content">
-            <h2>🎯 IP-логгер (Grabify)</h2>
+            <h2>🎯 IP-логгер</h2>
             <div class="input-group">
                 <input type="text" id="loggerInput" placeholder="URL для маскировки" value="youtube.com" />
                 <button class="btn" id="loggerBtn">⚡ Создать ссылку</button>
+                <button class="btn-small" onclick="copyResult('loggerResult')">📋</button>
             </div>
             <div id="loggerResult" class="result-card"></div>
-        </section>
-
-        <!-- ===== ВКЛАДКА 7: IMAGE ===== -->
-        <section id="image" class="tab-content">
-            <h2>🖼️ Поиск по изображению</h2>
-            <div class="input-group">
-                <input type="text" id="imageInput" placeholder="Ссылка на изображение или загрузите файл" />
-                <input type="file" id="imageFile" accept="image/*" />
-                <button class="btn" id="imageBtn">🔍 Искать</button>
-            </div>
-            <div id="imageResult" class="result-card"></div>
-        </section>
-
-        <!-- ===== ВКЛАДКА 8: HISTORY ===== -->
-        <section id="history" class="tab-content">
-            <h2>📜 История запросов</h2>
-            <div class="input-group">
-                <button class="btn-small" onclick="clearHistory()">🗑️ Очистить</button>
-                <button class="btn-small" onclick="exportHistory('json')">💾 Экспорт JSON</button>
-                <button class="btn-small" onclick="exportHistory('csv')">💾 Экспорт CSV</button>
-            </div>
-            <div id="historyListContainer" class="result-card"></div>
-        </section>
-
-        <!-- ===== ВКЛАДКА 9: SETTINGS ===== -->
-        <section id="settings" class="tab-content">
-            <h2>⚙️ Настройки</h2>
-            <div class="settings-group">
-                <label>🌙 Тёмная тема: <input type="checkbox" id="darkModeToggle" /></label><br />
-                <label>🔔 Telegram уведомления: <input type="checkbox" id="telegramToggle" /></label><br />
-                <label>📡 Мониторинг (сек): <input type="number" id="monitorInterval" value="30" min="5" /></label><br />
-                <label>🌐 Язык: 
-                    <select id="langSelect"><option value="ru">Русский</option><option value="en">English</option></select>
-                </label><br />
-                <button class="btn" id="saveSettingsBtn">💾 Сохранить настройки</button>
-            </div>
         </section>
 
     </div>
