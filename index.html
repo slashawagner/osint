@@ -73,30 +73,78 @@
             <div id="loggerResult" class="result-card"></div>
         </section>
 
-        <!-- ===== SHERLOCK ===== -->
+        <!-- ===== SHERLOCK (ССЫЛКА) ===== -->
         <section id="sherlock" class="tab-content">
             <h2>🕵️ Sherlock — поиск по юзернейму (300+ сайтов)</h2>
-            <div class="input-group">
-                <input type="text" id="sherlockInput" placeholder="Введите юзернейм (например, john_doe)">
-                <button class="btn" id="sherlockBtn">🔍 Искать</button>
-                <button class="btn-small" onclick="copyResult('sherlockResult')">📋 Копировать</button>
+            <p style="color:#94a3b8; margin-bottom:16px;">Откройте онлайн-версию Sherlock, чтобы найти профиль по юзернейму.</p>
+            <div class="input-group" style="flex-direction:column; gap:12px;">
+                <input type="text" id="sherlockInput" placeholder="Введите юзернейм (например, john_doe)" style="width:100%;">
+                <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                    <a href="#" id="sherlockLink" target="_blank" class="btn" style="text-decoration:none; text-align:center; flex:1; min-width:150px;">
+                        🔍 Искать в Sherlock
+                    </a>
+                    <a href="https://sherlock-project.vercel.app/" target="_blank" class="btn-small" style="display:inline-flex; align-items:center; gap:6px; padding:14px 20px; background:rgba(255,255,255,0.06); border-radius:14px; text-decoration:none; color:#e2e8f0;">
+                        🌐 Открыть Sherlock Online
+                    </a>
+                </div>
             </div>
-            <div id="sherlockResult" class="result-card"></div>
+            <div id="sherlockResult" class="result-card" style="margin-top:16px;"></div>
         </section>
 
-        <!-- ===== MAIGRET ===== -->
+        <!-- ===== MAIGRET (ССЫЛКА) ===== -->
         <section id="maigret" class="tab-content">
             <h2>🔎 Maigret — глубокий поиск по юзернейму (2000+ сайтов)</h2>
-            <div class="input-group">
-                <input type="text" id="maigretInput" placeholder="Введите юзернейм (например, john_doe)">
-                <button class="btn" id="maigretBtn">🔍 Искать</button>
-                <button class="btn-small" onclick="copyResult('maigretResult')">📋 Копировать</button>
+            <p style="color:#94a3b8; margin-bottom:16px;">Откройте онлайн-версию Maigret для более глубокого поиска.</p>
+            <div class="input-group" style="flex-direction:column; gap:12px;">
+                <input type="text" id="maigretInput" placeholder="Введите юзернейм (например, john_doe)" style="width:100%;">
+                <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                    <a href="#" id="maigretLink" target="_blank" class="btn" style="text-decoration:none; text-align:center; flex:1; min-width:150px;">
+                        🔍 Искать в Maigret
+                    </a>
+                    <a href="https://maigret.onrender.com/" target="_blank" class="btn-small" style="display:inline-flex; align-items:center; gap:6px; padding:14px 20px; background:rgba(255,255,255,0.06); border-radius:14px; text-decoration:none; color:#e2e8f0;">
+                        🌐 Открыть Maigret Online
+                    </a>
+                </div>
             </div>
-            <div id="maigretResult" class="result-card"></div>
+            <div id="maigretResult" class="result-card" style="margin-top:16px;"></div>
         </section>
 
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        // ===== ЛОГИКА ДЛЯ ССЫЛОК SHERLOCK И MAIGRET =====
+        document.getElementById('sherlockInput').addEventListener('input', function() {
+            const username = this.value.trim();
+            const link = document.getElementById('sherlockLink');
+            if (username) {
+                link.href = `https://sherlock-project.vercel.app/?username=${encodeURIComponent(username)}`;
+                link.textContent = `🔍 Искать "${username}" в Sherlock`;
+                link.style.opacity = '1';
+                link.style.pointerEvents = 'auto';
+            } else {
+                link.href = '#';
+                link.textContent = '🔍 Введите юзернейм';
+                link.style.opacity = '0.5';
+                link.style.pointerEvents = 'none';
+            }
+        });
+
+        document.getElementById('maigretInput').addEventListener('input', function() {
+            const username = this.value.trim();
+            const link = document.getElementById('maigretLink');
+            if (username) {
+                link.href = `https://maigret.onrender.com/?username=${encodeURIComponent(username)}`;
+                link.textContent = `🔍 Искать "${username}" в Maigret`;
+                link.style.opacity = '1';
+                link.style.pointerEvents = 'auto';
+            } else {
+                link.href = '#';
+                link.textContent = '🔍 Введите юзернейм';
+                link.style.opacity = '0.5';
+                link.style.pointerEvents = 'none';
+            }
+        });
+    </script>
+
 </body>
 </html>
