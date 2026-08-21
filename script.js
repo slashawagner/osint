@@ -94,7 +94,7 @@ function displayResult(id, text) {
 }
 
 // ============================================
-// 4. IP-ЛОКАТОР (ip-api.com — 45 запросов/мин)
+// 4. IP-ЛОКАТОР (ip-api.com)
 // ============================================
 document.getElementById('ipBtn').addEventListener('click', async () => {
     const ip = document.getElementById('ipInput').value.trim();
@@ -232,16 +232,17 @@ document.getElementById('sherlockBtn').addEventListener('click', async () => {
     if (!username) return displayResult('sherlockResult', '❌ Введите юзернейм');
     displayResult('sherlockResult', '⏳ Поиск в 300+ сервисах...');
     try {
-        const response = await fetch(`https://api.technisync.co/sherlock/${username}`);
+        // Используем публичный Sherlock API
+        const response = await fetch(`https://sherlock-api.vercel.app/api/search?username=${username}`);
         const data = await response.json();
-        if (data && data.found) {
+        if (data && data.found && data.found.length > 0) {
             let result = `🕵️ Результаты для @${username}:\n\n`;
-            const sites = Object.entries(data.found).slice(0, 25);
-            for (const [site, url] of sites) {
-                result += `  ✅ ${site}: ${url}\n`;
+            const sites = data.found.slice(0, 25);
+            for (const site of sites) {
+                result += `  ✅ ${site.site}: ${site.url}\n`;
             }
-            if (Object.keys(data.found).length > 25) {
-                result += `\n... и ещё ${Object.keys(data.found).length - 25} сайтов`;
+            if (data.found.length > 25) {
+                result += `\n... и ещё ${data.found.length - 25} сайтов`;
             }
             displayResult('sherlockResult', result);
         } else {
@@ -260,16 +261,17 @@ document.getElementById('maigretBtn').addEventListener('click', async () => {
     if (!username) return displayResult('maigretResult', '❌ Введите юзернейм');
     displayResult('maigretResult', '⏳ Глубокий поиск в 2000+ сервисах...');
     try {
-        const response = await fetch(`https://api.technisync.co/maigret/${username}`);
+        // Используем публичный Maigret API
+        const response = await fetch(`https://maigret-api.onrender.com/search?username=${username}`);
         const data = await response.json();
-        if (data && data.found) {
+        if (data && data.found && data.found.length > 0) {
             let result = `🔎 Результаты для @${username}:\n\n`;
-            const sites = Object.entries(data.found).slice(0, 30);
-            for (const [site, url] of sites) {
-                result += `  ✅ ${site}: ${url}\n`;
+            const sites = data.found.slice(0, 30);
+            for (const site of sites) {
+                result += `  ✅ ${site.site}: ${site.url}\n`;
             }
-            if (Object.keys(data.found).length > 30) {
-                result += `\n... и ещё ${Object.keys(data.found).length - 30} сайтов`;
+            if (data.found.length > 30) {
+                result += `\n... и ещё ${data.found.length - 30} сайтов`;
             }
             displayResult('maigretResult', result);
         } else {
