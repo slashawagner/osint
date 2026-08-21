@@ -1,6 +1,4 @@
-// ============================================
-// 1. АНИМИРОВАННЫЙ ФОН
-// ============================================
+// ===== АНИМИРОВАННЫЙ ФОН =====
 const canvas = document.getElementById('bgCanvas');
 const ctx = canvas.getContext('2d');
 let width, height, stars = [];
@@ -60,9 +58,7 @@ function drawStars() {
 }
 drawStars();
 
-// ============================================
-// 2. ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК
-// ============================================
+// ===== ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК =====
 document.querySelectorAll('.tab').forEach(tab => {
     tab.addEventListener('click', function () {
         document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -72,9 +68,7 @@ document.querySelectorAll('.tab').forEach(tab => {
     });
 });
 
-// ============================================
-// 3. УТИЛИТЫ
-// ============================================
+// ===== УТИЛИТЫ =====
 function copyResult(id) {
     const el = document.getElementById(id);
     if (!el || !el.textContent) return alert('Нет данных');
@@ -93,9 +87,7 @@ function displayResult(id, text) {
     el.textContent = text;
 }
 
-// ============================================
-// 4. IP-ЛОКАТОР (ip-api.com)
-// ============================================
+// ===== IP-ЛОКАТОР =====
 document.getElementById('ipBtn').addEventListener('click', async () => {
     const ip = document.getElementById('ipInput').value.trim();
     if (!ip) return displayResult('ipResult', '❌ Введите IP');
@@ -121,9 +113,7 @@ document.getElementById('ipBtn').addEventListener('click', async () => {
     }
 });
 
-// ============================================
-// 5. PHONE-ИНФО (через apilayer)
-// ============================================
+// ===== PHONE-ИНФО =====
 document.getElementById('phoneBtn').addEventListener('click', async () => {
     const phone = document.getElementById('phoneInput').value.trim();
     if (!phone) return displayResult('phoneResult', '❌ Введите номер');
@@ -142,9 +132,7 @@ document.getElementById('phoneBtn').addEventListener('click', async () => {
     }
 });
 
-// ============================================
-// 6. СОЦ-ЧЕКЕР
-// ============================================
+// ===== СОЦ-ЧЕКЕР =====
 document.getElementById('socialBtn').addEventListener('click', async () => {
     const query = document.getElementById('socialInput').value.trim();
     if (!query) return displayResult('socialResult', '❌ Введите данные');
@@ -191,9 +179,7 @@ document.getElementById('socialBtn').addEventListener('click', async () => {
     displayResult('socialResult', result);
 });
 
-// ============================================
-// 7. IP-ЛОГГЕР (Grabify)
-// ============================================
+// ===== IP-ЛОГГЕР =====
 document.getElementById('loggerBtn').addEventListener('click', async () => {
     const target = document.getElementById('loggerInput').value.trim() || 'youtube.com';
     displayResult('loggerResult', '⏳ Создание ссылки...');

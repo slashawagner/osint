@@ -28,7 +28,7 @@ body {
 .container {
     position: relative;
     z-index: 1;
-    max-width: 920px;
+    max-width: 820px;
     width: 100%;
     background: rgba(10, 10, 15, 0.85);
     backdrop-filter: blur(12px);
@@ -89,7 +89,7 @@ header {
 
 .tabs {
     display: flex;
-    gap: 4px;
+    gap: 6px;
     margin-bottom: 28px;
     flex-wrap: wrap;
     border-bottom: 1px solid rgba(255, 255, 255, 0.04);
@@ -97,19 +97,18 @@ header {
 }
 
 .tab {
-    padding: 10px 18px;
+    padding: 10px 22px;
     background: transparent;
     border: none;
     border-radius: 10px 10px 0 0;
     cursor: pointer;
     font-weight: 600;
-    font-size: 13px;
+    font-size: 14px;
     color: #94a3b8;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
-    gap: 6px;
-    white-space: nowrap;
+    gap: 8px;
 }
 
 .tab:hover {
@@ -142,15 +141,15 @@ header {
 
 .input-group {
     display: flex;
-    gap: 10px;
+    gap: 12px;
     flex-wrap: wrap;
     margin-bottom: 16px;
 }
 
 .input-group input {
     flex: 1;
-    min-width: 180px;
-    padding: 14px 18px;
+    min-width: 200px;
+    padding: 14px 20px;
     background: rgba(255, 255, 255, 0.04);
     border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: 14px;
@@ -171,7 +170,7 @@ header {
 }
 
 .btn {
-    padding: 14px 28px;
+    padding: 14px 32px;
     background: linear-gradient(135deg, #00d4ff, #7b2ffc);
     border: none;
     border-radius: 14px;
@@ -221,17 +220,6 @@ header {
     line-height: 1.7;
     white-space: pre-wrap;
     word-wrap: break-word;
-    max-height: 500px;
-    overflow-y: auto;
-}
-
-.result-card::-webkit-scrollbar {
-    width: 6px;
-}
-
-.result-card::-webkit-scrollbar-thumb {
-    background: #00d4ff;
-    border-radius: 10px;
 }
 
 @keyframes fadeInUp {
@@ -248,15 +236,14 @@ header {
     .container { padding: 18px; }
     .logo-text { font-size: 20px; }
     .version { margin-left: 0; }
-    .tab { padding: 6px 10px; font-size: 11px; }
-    .input-group input { min-width: 120px; }
-    .btn { padding: 10px 16px; font-size: 13px; }
-    .btn-small { font-size: 11px; padding: 4px 10px; }
+    .tab { padding: 8px 14px; font-size: 13px; }
+    .input-group input { min-width: 150px; }
+    .btn { padding: 12px 20px; font-size: 13px; }
 }
 
 @media (max-width: 480px) {
-    .tab { padding: 4px 8px; font-size: 10px; }
-    .input-group input { padding: 8px 10px; font-size: 13px; }
+    .tab { padding: 6px 10px; font-size: 12px; }
+    .input-group input { padding: 10px 14px; }
     .result-card { padding: 12px 14px; font-size: 12px; }
-    .btn { padding: 8px 12px; font-size: 12px; }
+    .btn { padding: 10px 16px; font-size: 12px; }
 }

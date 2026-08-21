@@ -17,7 +17,7 @@
                 <span class="logo-icon">🛡️</span>
                 <span class="logo-text">OSINT<span>Pro</span></span>
             </div>
-            <span class="version">v4.0</span>
+            <span class="version">v3.0</span>
         </header>
 
         <nav class="tabs">
@@ -25,11 +25,8 @@
             <button class="tab" data-tab="phone">📞 Phone-инфо</button>
             <button class="tab" data-tab="social">🔍 Соц-чекер</button>
             <button class="tab" data-tab="logger">🎯 IP-логгер</button>
-            <button class="tab" data-tab="sherlock">🕵️ Sherlock</button>
-            <button class="tab" data-tab="maigret">🔎 Maigret</button>
         </nav>
 
-        <!-- ===== IP-ЛОКАТОР ===== -->
         <section id="ip" class="tab-content active">
             <h2>🌐 Геолокация по IP</h2>
             <div class="input-group">
@@ -40,7 +37,6 @@
             <div id="ipResult" class="result-card"></div>
         </section>
 
-        <!-- ===== PHONE-ИНФО ===== -->
         <section id="phone" class="tab-content">
             <h2>📞 Информация по номеру</h2>
             <div class="input-group">
@@ -51,7 +47,6 @@
             <div id="phoneResult" class="result-card"></div>
         </section>
 
-        <!-- ===== СОЦ-ЧЕКЕР ===== -->
         <section id="social" class="tab-content">
             <h2>🔍 Проверка в соцсетях</h2>
             <div class="input-group">
@@ -62,7 +57,6 @@
             <div id="socialResult" class="result-card"></div>
         </section>
 
-        <!-- ===== IP-ЛОГГЕР ===== -->
         <section id="logger" class="tab-content">
             <h2>🎯 IP-логгер (Grabify)</h2>
             <div class="input-group">
@@ -73,78 +67,8 @@
             <div id="loggerResult" class="result-card"></div>
         </section>
 
-        <!-- ===== SHERLOCK (ССЫЛКА) ===== -->
-        <section id="sherlock" class="tab-content">
-            <h2>🕵️ Sherlock — поиск по юзернейму (300+ сайтов)</h2>
-            <p style="color:#94a3b8; margin-bottom:16px;">Откройте онлайн-версию Sherlock, чтобы найти профиль по юзернейму.</p>
-            <div class="input-group" style="flex-direction:column; gap:12px;">
-                <input type="text" id="sherlockInput" placeholder="Введите юзернейм (например, john_doe)" style="width:100%;">
-                <div style="display:flex; gap:10px; flex-wrap:wrap;">
-                    <a href="#" id="sherlockLink" target="_blank" class="btn" style="text-decoration:none; text-align:center; flex:1; min-width:150px;">
-                        🔍 Искать в Sherlock
-                    </a>
-                    <a href="https://sherlock-project.vercel.app/" target="_blank" class="btn-small" style="display:inline-flex; align-items:center; gap:6px; padding:14px 20px; background:rgba(255,255,255,0.06); border-radius:14px; text-decoration:none; color:#e2e8f0;">
-                        🌐 Открыть Sherlock Online
-                    </a>
-                </div>
-            </div>
-            <div id="sherlockResult" class="result-card" style="margin-top:16px;"></div>
-        </section>
-
-        <!-- ===== MAIGRET (ССЫЛКА) ===== -->
-        <section id="maigret" class="tab-content">
-            <h2>🔎 Maigret — глубокий поиск по юзернейму (2000+ сайтов)</h2>
-            <p style="color:#94a3b8; margin-bottom:16px;">Откройте онлайн-версию Maigret для более глубокого поиска.</p>
-            <div class="input-group" style="flex-direction:column; gap:12px;">
-                <input type="text" id="maigretInput" placeholder="Введите юзернейм (например, john_doe)" style="width:100%;">
-                <div style="display:flex; gap:10px; flex-wrap:wrap;">
-                    <a href="#" id="maigretLink" target="_blank" class="btn" style="text-decoration:none; text-align:center; flex:1; min-width:150px;">
-                        🔍 Искать в Maigret
-                    </a>
-                    <a href="https://maigret.onrender.com/" target="_blank" class="btn-small" style="display:inline-flex; align-items:center; gap:6px; padding:14px 20px; background:rgba(255,255,255,0.06); border-radius:14px; text-decoration:none; color:#e2e8f0;">
-                        🌐 Открыть Maigret Online
-                    </a>
-                </div>
-            </div>
-            <div id="maigretResult" class="result-card" style="margin-top:16px;"></div>
-        </section>
-
     </div>
 
-    <script>
-        // ===== ЛОГИКА ДЛЯ ССЫЛОК SHERLOCK И MAIGRET =====
-        document.getElementById('sherlockInput').addEventListener('input', function() {
-            const username = this.value.trim();
-            const link = document.getElementById('sherlockLink');
-            if (username) {
-                link.href = `https://sherlock-project.vercel.app/?username=${encodeURIComponent(username)}`;
-                link.textContent = `🔍 Искать "${username}" в Sherlock`;
-                link.style.opacity = '1';
-                link.style.pointerEvents = 'auto';
-            } else {
-                link.href = '#';
-                link.textContent = '🔍 Введите юзернейм';
-                link.style.opacity = '0.5';
-                link.style.pointerEvents = 'none';
-            }
-        });
-
-        document.getElementById('maigretInput').addEventListener('input', function() {
-            const username = this.value.trim();
-            const link = document.getElementById('maigretLink');
-            if (username) {
-                link.href = `https://maigret.onrender.com/?username=${encodeURIComponent(username)}`;
-                link.textContent = `🔍 Искать "${username}" в Maigret`;
-                link.style.opacity = '1';
-                link.style.pointerEvents = 'auto';
-            } else {
-                link.href = '#';
-                link.textContent = '🔍 Введите юзернейм';
-                link.style.opacity = '0.5';
-                link.style.pointerEvents = 'none';
-            }
-        });
-    </script>
-
+    <script src="script.js"></script>
 </body>
 </html>
