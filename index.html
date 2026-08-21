@@ -17,7 +17,7 @@
                 <span class="logo-icon">🛡️</span>
                 <span class="logo-text">OSINT<span>Pro</span></span>
             </div>
-            <span class="version">v3.0</span>
+            <span class="version">v4.0</span>
         </header>
 
         <nav class="tabs">
@@ -25,8 +25,11 @@
             <button class="tab" data-tab="phone">📞 Phone-инфо</button>
             <button class="tab" data-tab="social">🔍 Соц-чекер</button>
             <button class="tab" data-tab="logger">🎯 IP-логгер</button>
+            <button class="tab" data-tab="sherlock">🕵️ Sherlock</button>
+            <button class="tab" data-tab="maigret">🔎 Maigret</button>
         </nav>
 
+        <!-- ===== IP-ЛОКАТОР ===== -->
         <section id="ip" class="tab-content active">
             <h2>🌐 Геолокация по IP</h2>
             <div class="input-group">
@@ -37,6 +40,7 @@
             <div id="ipResult" class="result-card"></div>
         </section>
 
+        <!-- ===== PHONE-ИНФО ===== -->
         <section id="phone" class="tab-content">
             <h2>📞 Информация по номеру</h2>
             <div class="input-group">
@@ -47,6 +51,7 @@
             <div id="phoneResult" class="result-card"></div>
         </section>
 
+        <!-- ===== СОЦ-ЧЕКЕР ===== -->
         <section id="social" class="tab-content">
             <h2>🔍 Проверка в соцсетях</h2>
             <div class="input-group">
@@ -57,6 +62,7 @@
             <div id="socialResult" class="result-card"></div>
         </section>
 
+        <!-- ===== IP-ЛОГГЕР ===== -->
         <section id="logger" class="tab-content">
             <h2>🎯 IP-логгер (Grabify)</h2>
             <div class="input-group">
@@ -65,6 +71,28 @@
                 <button class="btn-small" onclick="copyResult('loggerResult')">📋 Копировать</button>
             </div>
             <div id="loggerResult" class="result-card"></div>
+        </section>
+
+        <!-- ===== SHERLOCK ===== -->
+        <section id="sherlock" class="tab-content">
+            <h2>🕵️ Sherlock — поиск по юзернейму (300+ сайтов)</h2>
+            <div class="input-group">
+                <input type="text" id="sherlockInput" placeholder="Введите юзернейм (например, john_doe)">
+                <button class="btn" id="sherlockBtn">🔍 Искать</button>
+                <button class="btn-small" onclick="copyResult('sherlockResult')">📋 Копировать</button>
+            </div>
+            <div id="sherlockResult" class="result-card"></div>
+        </section>
+
+        <!-- ===== MAIGRET ===== -->
+        <section id="maigret" class="tab-content">
+            <h2>🔎 Maigret — глубокий поиск по юзернейму (2000+ сайтов)</h2>
+            <div class="input-group">
+                <input type="text" id="maigretInput" placeholder="Введите юзернейм (например, john_doe)">
+                <button class="btn" id="maigretBtn">🔍 Искать</button>
+                <button class="btn-small" onclick="copyResult('maigretResult')">📋 Копировать</button>
+            </div>
+            <div id="maigretResult" class="result-card"></div>
         </section>
 
     </div>

@@ -223,3 +223,59 @@ document.getElementById('loggerBtn').addEventListener('click', async () => {
         displayResult('loggerResult', `❌ ${e.message}`);
     }
 });
+
+// ============================================
+// 8. SHERLOCK — ПОИСК ПО ЮЗЕРНЕЙМУ (300+)
+// ============================================
+document.getElementById('sherlockBtn').addEventListener('click', async () => {
+    const username = document.getElementById('sherlockInput').value.trim();
+    if (!username) return displayResult('sherlockResult', '❌ Введите юзернейм');
+    displayResult('sherlockResult', '⏳ Поиск в 300+ сервисах...');
+    try {
+        const response = await fetch(`https://api.technisync.co/sherlock/${username}`);
+        const data = await response.json();
+        if (data && data.found) {
+            let result = `🕵️ Результаты для @${username}:\n\n`;
+            const sites = Object.entries(data.found).slice(0, 25);
+            for (const [site, url] of sites) {
+                result += `  ✅ ${site}: ${url}\n`;
+            }
+            if (Object.keys(data.found).length > 25) {
+                result += `\n... и ещё ${Object.keys(data.found).length - 25} сайтов`;
+            }
+            displayResult('sherlockResult', result);
+        } else {
+            displayResult('sherlockResult', `❌ Профиль @${username} не найден`);
+        }
+    } catch (e) {
+        displayResult('sherlockResult', `❌ Ошибка: ${e.message}`);
+    }
+});
+
+// ============================================
+// 9. MAIGRET — ГЛУБОКИЙ ПОИСК (2000+)
+// ============================================
+document.getElementById('maigretBtn').addEventListener('click', async () => {
+    const username = document.getElementById('maigretInput').value.trim();
+    if (!username) return displayResult('maigretResult', '❌ Введите юзернейм');
+    displayResult('maigretResult', '⏳ Глубокий поиск в 2000+ сервисах...');
+    try {
+        const response = await fetch(`https://api.technisync.co/maigret/${username}`);
+        const data = await response.json();
+        if (data && data.found) {
+            let result = `🔎 Результаты для @${username}:\n\n`;
+            const sites = Object.entries(data.found).slice(0, 30);
+            for (const [site, url] of sites) {
+                result += `  ✅ ${site}: ${url}\n`;
+            }
+            if (Object.keys(data.found).length > 30) {
+                result += `\n... и ещё ${Object.keys(data.found).length - 30} сайтов`;
+            }
+            displayResult('maigretResult', result);
+        } else {
+            displayResult('maigretResult', `❌ Профиль @${username} не найден`);
+        }
+    } catch (e) {
+        displayResult('maigretResult', `❌ Ошибка: ${e.message}`);
+    }
+});
