@@ -1,4 +1,6 @@
-// ===== АНИМИРОВАННЫЙ ФОН =====
+// ============================================
+// 1. АНИМИРОВАННЫЙ ФОН
+// ============================================
 const canvas = document.getElementById('bgCanvas');
 const ctx = canvas.getContext('2d');
 let width, height, stars = [];
@@ -58,7 +60,9 @@ function drawStars() {
 }
 drawStars();
 
-// ===== ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК =====
+// ============================================
+// 2. ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК
+// ============================================
 document.querySelectorAll('.tab').forEach(tab => {
     tab.addEventListener('click', function () {
         document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -68,7 +72,9 @@ document.querySelectorAll('.tab').forEach(tab => {
     });
 });
 
-// ===== УТИЛИТЫ =====
+// ============================================
+// 3. УТИЛИТЫ
+// ============================================
 function copyResult(id) {
     const el = document.getElementById(id);
     if (!el || !el.textContent) return alert('Нет данных');
@@ -87,32 +93,37 @@ function displayResult(id, text) {
     el.textContent = text;
 }
 
-// ===== IP-ЛОКАТОР =====
+// ============================================
+// 4. IP-ЛОКАТОР (ip-api.com — 45 запросов/мин)
+// ============================================
 document.getElementById('ipBtn').addEventListener('click', async () => {
     const ip = document.getElementById('ipInput').value.trim();
     if (!ip) return displayResult('ipResult', '❌ Введите IP');
     displayResult('ipResult', '⏳ Загрузка...');
     try {
-        const data = await fetchAPI(`https://ipapi.co/${ip}/json/`);
-        if (data.error) {
-            displayResult('ipResult', `❌ ${data.reason || 'Ошибка'}`);
-        } else {
+        const response = await fetch(`http://ip-api.com/json/${ip}?fields=status,message,country,regionName,city,isp,lat,lon,timezone,org,as,query`);
+        const data = await response.json();
+        if (data.status === 'success') {
             displayResult('ipResult', `
-📍 IP: ${data.ip}
-🌍 Страна: ${data.country_name} (${data.country_code})
-🏙️ Регион: ${data.region || '—'}
-🗺️ Город: ${data.city || '—'}
-📡 Провайдер: ${data.org || '—'}
-📌 Координаты: ${data.latitude || '—'}, ${data.longitude || '—'}
-🗺️ Карта: https://www.google.com/maps?q=${data.latitude},${data.longitude}
+📍 IP: ${data.query}
+🌍 Страна: ${data.country}
+🏙️ Регион: ${data.regionName}
+🗺️ Город: ${data.city}
+📡 Провайдер: ${data.isp}
+📌 Координаты: ${data.lat}, ${data.lon}
+🗺️ Карта: https://www.google.com/maps?q=${data.lat},${data.lon}
             `.trim());
+        } else {
+            displayResult('ipResult', `❌ ${data.message || 'Ошибка'}`);
         }
     } catch (e) {
         displayResult('ipResult', `❌ Ошибка: ${e.message}`);
     }
 });
 
-// ===== PHONE-ИНФО =====
+// ============================================
+// 5. PHONE-ИНФО (через apilayer)
+// ============================================
 document.getElementById('phoneBtn').addEventListener('click', async () => {
     const phone = document.getElementById('phoneInput').value.trim();
     if (!phone) return displayResult('phoneResult', '❌ Введите номер');
@@ -131,7 +142,9 @@ document.getElementById('phoneBtn').addEventListener('click', async () => {
     }
 });
 
-// ===== СОЦ-ЧЕКЕР =====
+// ============================================
+// 6. СОЦ-ЧЕКЕР
+// ============================================
 document.getElementById('socialBtn').addEventListener('click', async () => {
     const query = document.getElementById('socialInput').value.trim();
     if (!query) return displayResult('socialResult', '❌ Введите данные');
@@ -178,7 +191,9 @@ document.getElementById('socialBtn').addEventListener('click', async () => {
     displayResult('socialResult', result);
 });
 
-// ===== IP-ЛОГГЕР =====
+// ============================================
+// 7. IP-ЛОГГЕР (Grabify)
+// ============================================
 document.getElementById('loggerBtn').addEventListener('click', async () => {
     const target = document.getElementById('loggerInput').value.trim() || 'youtube.com';
     displayResult('loggerResult', '⏳ Создание ссылки...');
