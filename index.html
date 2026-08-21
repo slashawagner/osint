@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>OSINT Tool Pro</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <!-- ===== АНИМИРОВАННЫЙ ФОН ===== -->
+    <canvas id="bgCanvas"></canvas>
+
+    <!-- ===== ОСНОВНОЙ КОНТЕЙНЕР ===== -->
+    <div class="container">
+
+        <!-- ХЕДЕР -->
+        <header>
+            <div class="logo">
+                <span class="logo-icon">🛡️</span>
+                <span class="logo-text">OSINT<span>Pro</span></span>
+            </div>
+            <div class="version">v3.0</div>
+        </header>
+
+        <!-- ВКЛАДКИ -->
+        <nav class="tabs">
+            <button class="tab active" data-tab="ip">🌐 IP-локатор</button>
+            <button class="tab" data-tab="phone">📞 Phone-инфо</button>
+            <button class="tab" data-tab="social">🔍 Соц-чекер</button>
+            <button class="tab" data-tab="logger">🎯 IP-логгер</button>
+        </nav>
+
+        <!-- ===== ВКЛАДКА 1: IP ===== -->
+        <section id="ip" class="tab-content active">
+            <h2>🌐 Геолокация по IP</h2>
+            <div class="input-group">
+                <input type="text" id="ipInput" placeholder="Введите IP (например, 8.8.8.8)" />
+                <button class="btn" id="ipBtn">🔍 Найти</button>
+            </div>
+            <div id="ipResult" class="result-card"></div>
+        </section>
+
+        <!-- ===== ВКЛАДКА 2: PHONE ===== -->
+        <section id="phone" class="tab-content">
+            <h2>📞 Информация по номеру</h2>
+            <div class="input-group">
+                <input type="text" id="phoneInput" placeholder="+79261234567" />
+                <button class="btn" id="phoneBtn">🔍 Найти</button>
+            </div>
+            <div id="phoneResult" class="result-card"></div>
+        </section>
+
+        <!-- ===== ВКЛАДКА 3: SOCIAL ===== -->
+        <section id="social" class="tab-content">
+            <h2>🔍 Проверка в соцсетях</h2>
+            <div class="input-group">
+                <input type="text" id="socialInput" placeholder="Юзернейм или номер (+79261234567)" />
+                <button class="btn" id="socialBtn">🔍 Проверить</button>
+            </div>
+            <div id="socialResult" class="result-card"></div>
+        </section>
+
+        <!-- ===== ВКЛАДКА 4: LOGGER ===== -->
+        <section id="logger" class="tab-content">
+            <h2>🎯 IP-логгер (Grabify)</h2>
+            <div class="input-group">
+                <input type="text" id="loggerInput" placeholder="URL для маскировки (youtube.com)" value="youtube.com" />
+                <button class="btn" id="loggerBtn">⚡ Создать ссылку</button>
+            </div>
+            <div id="loggerResult" class="result-card"></div>
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
